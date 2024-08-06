@@ -1,5 +1,7 @@
-const communicator = {
-    apiRequest: async function (_method, _headers, _body, _urlExtend) {
+class Communicator {
+    constructor() {}
+
+    async apiRequest(_method, _headers, _body, _urlExtend) {
         const options = {
             method: _method,
             headers: {
@@ -24,8 +26,11 @@ const communicator = {
         } catch (err) {
             console.error(err);
         }
-    },
-    apiRegisterAgent: async function (symbol, faction) {
+    }
+
+    // --- Agents and Factions ---
+
+    async registerAgent(symbol, faction) {
         const response = await this.apiRequest(
             'POST',
             {},
@@ -34,19 +39,36 @@ const communicator = {
         );
 
         return response;
-    },
-    viewFactions: async function () {
+    }
+
+    async viewFactions(token) {
         const response = await this.apiRequest(
             'GET',
             {
-                Authorization: `Bearer ${process.env.REGEX_TOKEN}`,
+                Authorization: `Bearer ${token}`,
             },
             {},
             'factions'
         );
 
         return response;
-    },
-};
+    }
 
-module.exports = communicator;
+    // --- Systems and Waypoints ---
+
+    // --- Navigation ---
+
+    // --- Extracting Resources ---
+
+    // --- Outfitting ---
+
+    // --- Maintenance ---
+
+    // --- Crew and Morale ---
+
+    // --- Exploration ---
+
+    // --- Markets ---
+}
+
+module.exports = Communicator;
