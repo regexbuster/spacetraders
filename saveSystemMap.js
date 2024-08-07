@@ -25,7 +25,7 @@ const Database = require('./database.js');
         );
 
         const response = await com.listSystems(
-            process.env.WH0P3R_TOKEN,
+            process.env.M3T30RM0GUL_TOKEN,
             page,
             limit
         );
