@@ -54,6 +54,19 @@ class Communicator {
         return response;
     }
 
+    async viewShips(token) {
+        const response = await this.apiRequest(
+            'GET',
+            {
+                Authorization: `Bearer ${token}`,
+            },
+            {},
+            'my/ships'
+        );
+
+        return response;
+    }
+
     async viewFactions(token, page = 1, limit = 10) {
         const response = await this.apiRequest(
             'GET',
