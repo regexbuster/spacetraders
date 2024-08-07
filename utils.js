@@ -12,7 +12,14 @@ const Communicator = require('./Communicator.js');
     //     'X1-UF22'
     // );
 
-    // console.log(response.data[1].traits);
+    // console.log(response.data[1].factions);
 
-    console.log(await com.viewShips(process.env.M3T30RM0GUL_TOKEN));
+    // console.log(await com.viewShips(process.env.M3T30RM0GUL_TOKEN));
+
+    console.log(
+        await com.getContract(
+            process.env.M3T30RM0GUL_TOKEN,
+            'clziy6uhve02ds60c8qhh0ac9'
+        )
+    );
 })();
