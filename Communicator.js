@@ -41,20 +41,72 @@ class Communicator {
         return response;
     }
 
-    async viewFactions(token) {
+    async viewAgent(token) {
         const response = await this.apiRequest(
             'GET',
             {
                 Authorization: `Bearer ${token}`,
             },
             {},
-            'factions'
+            'my/agent'
+        );
+
+        return response;
+    }
+
+    async viewFactions(token, page = 1, limit = 10) {
+        const response = await this.apiRequest(
+            'GET',
+            {
+                Authorization: `Bearer ${token}`,
+            },
+            {},
+            `factions?page=${page}&limit=${limit}`
+        );
+
+        return response;
+    }
+
+    async viewContracts(token, page = 1, limit = 10) {
+        const response = await this.apiRequest(
+            'GET',
+            {
+                Authorization: `Bearer ${token}`,
+            },
+            {},
+            `my/contracts?page=${page}&limit=${limit}`
         );
 
         return response;
     }
 
     // --- Systems and Waypoints ---
+
+    async viewSystems(token, page = 1, limit = 10) {
+        const response = await this.apiRequest(
+            'GET',
+            {
+                Authorization: `Bearer ${token}`,
+            },
+            {},
+            `systems?page=${page}&limit=${limit}`
+        );
+
+        return response;
+    }
+
+    async viewWaypoints(token, systemSymbol, page = 1, limit = 10) {
+        const response = await this.apiRequest(
+            'GET',
+            {
+                Authorization: `Bearer ${token}`,
+            },
+            {},
+            `systems/${systemSymbol}/waypoints?page=${page}&limit=${limit}`
+        );
+
+        return response;
+    }
 
     // --- Navigation ---
 
