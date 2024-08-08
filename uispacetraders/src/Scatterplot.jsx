@@ -9,7 +9,7 @@ const Scatterplot = ({ data }) => {
         mode: 'markers',
         type: 'scatter',
         marker: { size: 8, color: 'blue' },
-        text: data.map((point) => point.label),
+        text: data.map((point) => point.symbol),
         textposition: 'top center',
     };
 
@@ -18,11 +18,11 @@ const Scatterplot = ({ data }) => {
             data={[trace]}
             layout={{
                 title: 'Orbital Bodies',
-                xaxis: { title: 'X Coordinate', range: [-64338, 65431] },
-                yaxis: { title: 'Y Coordinate', range: [-65467, 72422] },
+                xaxis: { title: 'X Coordinate', range: [-(2 ** 16), 2 ** 16] },
+                yaxis: { title: 'Y Coordinate', range: [-(2 ** 17), 2 ** 17] },
                 autosize: true,
             }}
-            style={{ width: '100%', height: '100%' }}
+            style={{ width: '100vw', height: '100vh' }}
             config={{ responsive: true, scrollZoom: true }}
         />
     );
