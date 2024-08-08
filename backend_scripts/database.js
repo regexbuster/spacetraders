@@ -5,7 +5,7 @@ require('dotenv').config();
 
 class Database {
     constructor(database, collection) {
-        this.uri = `mongodb+srv://insandouts-api:${process.env.MONGODB_PASS}@general.wfuxmik.mongodb.net/?appName=General`;
+        this.uri = `mongodb+srv://spacetrader:${process.env.MONGODB_PASS}@general.wfuxmik.mongodb.net/?retryWrites=true&w=majority&appName=General`;
         this.database = database;
         this.collection = collection;
     }
@@ -91,7 +91,8 @@ class Database {
                 .find(filter);
 
             if (result) {
-                return { ok: true, res: result };
+                let values = await result.toArray();
+                return { ok: true, res: values };
             } else {
                 return { ok: false, res: result };
             }

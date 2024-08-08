@@ -1,7 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import Scatterplot from './Scatterplot';
 
-import Axis from './Graph.jsx';
+const data = [
+    { x: 10, y: 20, label: 'Body A' },
+    { x: 15, y: 25, label: 'Body B' },
+    { x: 20, y: 30, label: 'Body C' },
+];
 
 function App() {
     return (
@@ -20,7 +25,7 @@ function App() {
                     Learn React
                 </a>
             </header>
-            <Axis />
+            <Scatterplot data={data} />
         </div>
     );
 }
