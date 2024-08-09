@@ -24,5 +24,9 @@
 
     let json_res = await response.json();
 
-    console.log(json_res);
+    console.log(
+        json_res.data.map((item) => {
+            return item.data;
+        })
+    );
 })();
