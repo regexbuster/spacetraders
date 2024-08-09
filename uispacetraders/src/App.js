@@ -1,10 +1,14 @@
 import './App.css';
 import Scatterplot from './Scatterplot';
+import Navbar from './Navbar';
+import FilterMenu from './FilterMenu';
 
 import { React, useState, useEffect } from 'react';
 
 function App() {
     const [data, setData] = useState([]);
+    const [filter, setFilter] = useState({});
+    const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
         (async function () {
@@ -20,9 +24,27 @@ function App() {
             setData(json_res.data);
         })();
     }, []);
+
+    useEffect(() => {
+        const newData = data.filter((item) => {
+            //
+        });
+        setFilteredData(newData);
+    }, [data, filter]);
+
     return (
         <div className="App">
-            <Scatterplot data={data} hexSize={1000} />
+            <Navbar />
+            <div className="plotWrapper">
+                <Scatterplot
+                    data={data.map((item) => {
+                        return item;
+                    })}
+                    setFilter={setFilter}
+                    hexSize={1000}
+                />
+                <FilterMenu />
+            </div>
         </div>
     );
 }

@@ -1,0 +1,28 @@
+.filterWrapper {
+    width: 20vw;
+    height: 90vh;
+
+    background-color: red;
+}
+
+.adder {
+    width: 100%;
+    min-height: 5vh;
+
+    border: black solid;
+
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.adder > select {
+    margin: 2%;
+}
+
+.adder > button {
+    margin: 2%;
+
+    height: 2rem;
+    width: 2rem;
+}
