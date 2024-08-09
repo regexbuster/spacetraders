@@ -2,7 +2,6 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 
 function getSystemTypeColor(type) {
-    // return '#000000';
     switch (type) {
         case 'NEUTRON_STAR':
             return '#73F8FA';
@@ -29,7 +28,44 @@ function getSystemTypeColor(type) {
     }
 }
 
-const Scatterplot = ({ data }) => {
+const Scatterplot = ({ data, hexSize }) => {
+    const hexRadius = hexSize;
+    const hexWidth = 2 * hexRadius;
+    const hexHeight = Math.sqrt(3) * hexRadius;
+
+    const createHexagonVertices = (cx, cy) => {
+        const vertices = [];
+        for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i;
+            const x = cx + hexRadius * Math.cos(angle);
+            const y = cy + hexRadius * Math.sin(angle);
+            vertices.push([x, y]);
+        }
+        return vertices;
+    };
+
+    const createHexShapes = () => {
+        const shapes = [];
+        for (let row = 0; row < hexHeight; row++) {
+            for (let col = 0; col < hexWidth; col++) {
+                const xOffset = col * hexWidth * 0.75;
+                const yOffset = row * hexHeight + ((col % 2) * hexHeight) / 2;
+                const vertices = createHexagonVertices(xOffset, yOffset);
+                const path =
+                    vertices.map(([x, y]) => `${x},${y}`).join(' L ') + ' Z';
+                shapes.push({
+                    type: 'path',
+                    path: `M ${path}`,
+                    fillcolor: 'rgba(200, 200, 200, 0.3)',
+                    line: {
+                        width: 1,
+                        color: 'gray',
+                    },
+                });
+            }
+        }
+        return shapes;
+    };
     const system_trace = {
         x: data.map((point) => point.x),
         y: data.map((point) => point.y),
@@ -54,9 +90,24 @@ const Scatterplot = ({ data }) => {
             data={[system_trace]}
             layout={{
                 title: 'Orbital Bodies',
-                xaxis: { title: 'X Coordinate', range: [-(2 ** 16), 2 ** 16] },
-                yaxis: { title: 'Y Coordinate', range: [-(2 ** 17), 2 ** 17] },
+                paper_bgcolor: '#1f1f1f',
+                plot_bgcolor: '#2f2f2f',
+                xaxis: {
+                    title: 'X Coordinate',
+                    range: [-70000, 70000],
+                    color: '#ffffff',
+                    linecolor: '#ffffff',
+                    tickcolor: '#ffffff',
+                },
+                yaxis: {
+                    title: 'Y Coordinate',
+                    range: [-80000, 80000],
+                    color: '#ffffff',
+                    linecolor: '#ffffff',
+                    tickcolor: '#ffffff',
+                },
                 autosize: true,
+                shapes: createHexShapes(),
             }}
             style={{ width: '100vw', height: '100vh' }}
             config={{ responsive: true, scrollZoom: true }}

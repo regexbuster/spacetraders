@@ -22,7 +22,7 @@ function App() {
     }, []);
     return (
         <div className="App">
-            <Scatterplot data={data} />
+            <Scatterplot data={data} hexSize={1000} />
         </div>
     );
 }
