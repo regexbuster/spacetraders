@@ -8,6 +8,7 @@ import { React, useState, useEffect } from 'react';
 function App() {
     const [data, setData] = useState([]);
     const [filter, setFilter] = useState({});
+    // eslint-disable-next-line no-unused-vars
     const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
     }, []);
 
     useEffect(() => {
+        // eslint-disable-next-line array-callback-return
         const newData = data.filter((item) => {
             //
         });
@@ -43,7 +45,7 @@ function App() {
                     setFilter={setFilter}
                     hexSize={1000}
                 />
-                <FilterMenu />
+                <FilterMenu updateFilter={setFilter} />
             </div>
         </div>
     );

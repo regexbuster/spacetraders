@@ -1,32 +1,58 @@
 import './FilterMenu.css';
 
-import { React, useState } from 'react';
+import { React } from 'react';
 
-const FilterMenu = () => {
+const FilterMenu = (updateFilter) => {
+    const checkboxes = [
+        'NEUTRON_STAR',
+        'RED_STAR',
+        'ORANGE_STAR',
+        'BLUE_STAR',
+        'YOUNG_STAR',
+        'WHITE_DWARF',
+        'BLACK_HOLE',
+        'HYPERGIANT',
+        'NEBULA',
+        'UNSTABLE',
+    ];
+
+    function makeFilter(event) {
+        event.preventDefault();
+        alert(event.target.elements.x_low.value);
+    }
+
     return (
-        <div className="filterWrapper">
-            <div className="adder">
-                <select name="filterVal" id="filterVal">
-                    <optgroup label="System">
-                        <option value="symbol">Symbol</option>
-                        <option value="sectorSymbol">Sector Symbol</option>
-                        <option value="type">Type</option>
-                        <option value="x">X</option>
-                        <option value="y">Y</option>
-                    </optgroup>
-                    <optgroup label="Waypoint (WP)">
-                        <option value="waypointSymbol">Symbol</option>
-                        <option value="waypointType">Type</option>
-                        <option value="waypointX">X</option>
-                        <option value="waypointY">Y</option>
-                    </optgroup>
-                    <optgroup label="Faction (F)">
-                        <option value="factionSymbol">Symbol</option>
-                    </optgroup>
-                </select>
-                <button>+</button>
+        <form onSubmit={makeFilter} className="filterForm">
+            <input type="text" id="system_name" value=""></input>
+            <div className="horizFilterDiv">
+                <input type="number" id="x_low" value="-70000"></input>
+                <p> {'< x <'} </p>
+                <input type="number" id="x_high" value="70000"></input>
             </div>
-        </div>
+            <div className="horizFilterDiv">
+                <input type="number" id="y_low" value="-80000"></input>
+                <p> {'< y <'} </p>
+                <input type="number" id="y_high" value="80000"></input>
+            </div>
+            <div className="checkFilterDiv">
+                {checkboxes.map((item) => {
+                    return (
+                        <div>
+                            <input
+                                type="checkbox"
+                                id={item}
+                                name={item}
+                                value={item}
+                            ></input>
+                            <label for={item}>
+                                {item.split('_').join(' ')}
+                            </label>
+                        </div>
+                    );
+                })}
+            </div>
+            <input type="submit" value="Submit"></input>
+        </form>
     );
 };
 

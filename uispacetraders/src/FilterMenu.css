@@ -1,28 +1,29 @@
-.filterWrapper {
+.filterForm {
     width: 20vw;
     height: 90vh;
 
     background-color: red;
 }
 
-.adder {
-    width: 100%;
-    min-height: 5vh;
-
-    border: black solid;
-
+.horizFilterDiv {
     display: flex;
     flex-flow: row;
+
     justify-content: space-between;
 }
 
-.adder > select {
-    margin: 2%;
+.checkFilterDiv {
+    /* display: grid;
+    grid-gap: 10px;
+    grid-template-rows: 4; */
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: aqua;
 }
 
-.adder > button {
-    margin: 2%;
-
-    height: 2rem;
-    width: 2rem;
+.checkFilterDiv > div {
+    display: flex;
+    flex-flow: row;
 }
