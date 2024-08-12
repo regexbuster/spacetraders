@@ -11,6 +11,10 @@ function App() {
     // eslint-disable-next-line no-unused-vars
     const [filteredData, setFilteredData] = useState([]);
 
+    const updateFilter = (data) => {
+        setFilter(data);
+    };
+
     useEffect(() => {
         (async function () {
             const response = await fetch('http://localhost:3001/systems', {
@@ -27,10 +31,48 @@ function App() {
     }, []);
 
     useEffect(() => {
-        // eslint-disable-next-line array-callback-return
         const newData = data.filter((item) => {
-            //
+            let filtered = false;
+            Object.keys(filter).forEach((key) => {
+                switch (key) {
+                    case 'system_name':
+                        if (item.symbol !== filter[key]) {
+                            filtered = true;
+                        }
+                        break;
+                    case 'x_low':
+                        if (item.x < filter[key]) {
+                            filtered = true;
+                        }
+                        break;
+                    case 'x_high':
+                        if (item.x > filter[key]) {
+                            filtered = true;
+                        }
+                        break;
+                    case 'y_low':
+                        if (item.y < filter[key]) {
+                            filtered = true;
+                        }
+                        break;
+                    case 'y_high':
+                        if (item.y > filter[key]) {
+                            filtered = true;
+                        }
+                        break;
+                    case 'system_types':
+                        //console.log(filter[key], item.type);
+                        if (!filter[key].includes(item.data.type)) {
+                            filtered = true;
+                        }
+                        break;
+                    default:
+                        filtered = true;
+                }
+            });
+            return !filtered;
         });
+        console.log(newData);
         setFilteredData(newData);
     }, [data, filter]);
 
@@ -39,13 +81,11 @@ function App() {
             <Navbar />
             <div className="plotWrapper">
                 <Scatterplot
-                    data={data.map((item) => {
+                    data={filteredData.map((item) => {
                         return item;
                     })}
-                    setFilter={setFilter}
-                    hexSize={1000}
                 />
-                <FilterMenu updateFilter={setFilter} />
+                <FilterMenu updateFilter={updateFilter} />
             </div>
         </div>
     );

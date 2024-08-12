@@ -4,6 +4,8 @@ const Communicator = require('./Communicator.js');
 const Database = require('./database.js');
 
 (async function () {
+    console.time('systemSync');
+
     let com = new Communicator();
     let db = new Database('spacetraders', 'system_data');
 
@@ -15,6 +17,7 @@ const Database = require('./database.js');
     const intervalId = setInterval(async function () {
         if (page > 425) {
             clearInterval(intervalId);
+            console.timeEnd('systemSync');
             return;
         }
 

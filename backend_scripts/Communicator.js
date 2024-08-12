@@ -34,7 +34,7 @@ class Communicator {
         return response;
     }
 
-    async registerAgent(symbol, faction, email = null) {
+    async registerAgent(symbol, faction = 'COSMIC', email = null) {
         let options = { symbol, faction };
 
         if (email != null) {

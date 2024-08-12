@@ -10,6 +10,20 @@
     flex-flow: row;
 
     justify-content: space-between;
+    height: 2rem;
+}
+
+.horizFilterDiv > input {
+    flex: 1;
+    width: 40%;
+}
+
+.horizFilterDiv > p {
+    flex: 1;
+    width: 10%;
+
+    text-align: center;
+    margin: 1rem;
 }
 
 .checkFilterDiv {
@@ -26,4 +40,8 @@
 .checkFilterDiv > div {
     display: flex;
     flex-flow: row;
+}
+
+#system_name {
+    z-index: 10000;
 }
